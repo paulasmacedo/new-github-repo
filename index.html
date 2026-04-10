@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'; connect-src 'self';" />
   <title>Gerador de Roteiro de Viagem</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -16,12 +17,12 @@
     <section class="form-card">
       <label>
         Destino
-        <input type="text" id="destination" placeholder="Ex: Lisboa" />
+        <input type="text" id="destination" placeholder="Ex: Lisboa" maxlength="80" required />
       </label>
 
       <label>
         Número de dias
-        <input type="number" id="days" min="1" max="14" value="3" />
+        <input type="number" id="days" min="1" max="14" value="3" required />
       </label>
 
       <label>

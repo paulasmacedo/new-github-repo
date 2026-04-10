@@ -1,0 +1,12 @@
+{
+  "name": "new-github-repo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "lint:html": "htmlhint index.html",
+    "validate": "npm run lint:html"
+  },
+  "devDependencies": {
+    "htmlhint": "^1.0.0"
+  }
+}

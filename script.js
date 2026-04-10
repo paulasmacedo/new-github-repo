@@ -5,6 +5,10 @@ const generateBtn = document.getElementById('generateBtn');
 const exportBtn = document.getElementById('exportBtn');
 const itineraryContainer = document.getElementById('itinerary');
 
+const validPreferences = ['economico', 'cultural', 'aventura'];
+
+const sanitizeInput = (value) => value.replace(/[<>&"'`]/g, '').trim();
+
 const suggestions = {
   economico: [
     'Visitar um mercado local',
@@ -115,9 +119,14 @@ function downloadTextFile(filename, content) {
 let currentItinerary = [];
 
 generateBtn.addEventListener('click', () => {
-  const destination = destinationInput.value.trim() || 'Seu destino';
-  const days = Math.max(1, Math.min(14, Number(daysInput.value) || 3));
-  const preference = preferenceSelect.value;
+  const destination = sanitizeInput(destinationInput.value) || 'Seu destino';
+  let days = Number(daysInput.value);
+  if (!Number.isInteger(days) || days < 1 || days > 14) {
+    days = 3;
+    daysInput.value = days;
+  }
+  const preferenceValue = preferenceSelect.value;
+  const preference = validPreferences.includes(preferenceValue) ? preferenceValue : 'economico';
 
   currentItinerary = formatItinerary(destination, days, preference);
   renderItinerary(currentItinerary);
@@ -127,9 +136,13 @@ generateBtn.addEventListener('click', () => {
 exportBtn.addEventListener('click', () => {
   if (!currentItinerary.length) return;
 
-  const destination = destinationInput.value.trim() || 'Seu destino';
-  const days = Math.max(1, Math.min(14, Number(daysInput.value) || 3));
-  const preference = preferenceSelect.value;
+  const destination = sanitizeInput(destinationInput.value) || 'Seu destino';
+  let days = Number(daysInput.value);
+  if (!Number.isInteger(days) || days < 1 || days > 14) {
+    days = 3;
+  }
+  const preferenceValue = preferenceSelect.value;
+  const preference = validPreferences.includes(preferenceValue) ? preferenceValue : 'economico';
   const text = buildPlainText(destination, days, preference, currentItinerary);
 
   downloadTextFile('roteiro-de-viagem.txt', text);
