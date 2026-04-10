@@ -43,6 +43,21 @@ npm install
 npm run validate
 ```
 
+## Visualizar a página localmente
+
+Execute o servidor PowerShell local:
+
+```powershell
+cd C:\Users\paula\new-github-repo
+.\serve.ps1 -Port 8000
+```
+
+Em seguida, abra em seu navegador:
+
+```text
+http://localhost:8000/
+```
+
 ## Publicar no GitHub Pages
 
 Se quiser publicar manualmente:
