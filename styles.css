@@ -1,11 +1,13 @@
 :root {
-  --bg: #f4f7fb;
+  --bg: #eff2ff;
   --surface: #ffffff;
-  --text: #1f2937;
+  --text: #111827;
   --muted: #6b7280;
-  --primary: #2563eb;
-  --primary-soft: #dbeafe;
+  --primary: #6366f1;
+  --primary-soft: #eef2ff;
+  --accent: #38bdf8;
   --border: #e5e7eb;
+  --shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
 }
 
 * {
@@ -14,61 +16,90 @@
 
 body {
   margin: 0;
-  font-family: Inter, system-ui, sans-serif;
-  background: var(--bg);
+  min-height: 100vh;
+  font-family: 'Inter', system-ui, sans-serif;
+  background: radial-gradient(circle at top left, rgba(99, 102, 241, 0.12), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(56, 189, 248, 0.14), transparent 24%),
+    var(--bg);
   color: var(--text);
 }
 
 .container {
-  max-width: 900px;
+  width: min(1080px, calc(100% - 32px));
   margin: 0 auto;
-  padding: 24px;
+  padding: 32px 0 48px;
 }
 
 header {
-  margin-bottom: 24px;
+  display: grid;
+  gap: 18px;
+  padding: 32px 24px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  backdrop-filter: blur(16px);
+  box-shadow: var(--shadow);
 }
 
 header h1 {
-  margin: 0 0 8px;
-  font-size: clamp(2rem, 3vw, 2.8rem);
+  margin: 0;
+  font-size: clamp(2.4rem, 4vw, 3.4rem);
+  line-height: 1.04;
 }
 
 header p {
   margin: 0;
+  max-width: 680px;
   color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.75;
 }
 
 .form-card,
 .result-card {
   background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 24px;
-  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: 24px;
+  padding: 28px;
+  box-shadow: var(--shadow);
 }
 
 .form-card {
   display: grid;
-  gap: 16px;
-  margin-bottom: 20px;
+  gap: 18px;
+  margin: 24px 0;
 }
 
 label {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  display: grid;
+  gap: 10px;
   font-weight: 600;
+  color: var(--text);
 }
 
 input,
 select {
   width: 100%;
-  padding: 14px 16px;
-  border: 1px solid var(--border);
-  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  border-radius: 18px;
+  padding: 14px 18px;
   font-size: 1rem;
-  background: #fff;
+  color: var(--text);
+  background: #f8fafc;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: rgba(99, 102, 241, 0.5);
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
 }
 
 button {
@@ -78,39 +109,44 @@ button {
   padding: 14px 22px;
   font-size: 1rem;
   font-weight: 700;
-  color: #fff;
-  background: var(--primary);
-  transition: transform 0.2s ease, background 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
-button:hover {
+button:hover:not(:disabled) {
   transform: translateY(-1px);
-  background: #1d4ed8;
+  box-shadow: 0 14px 24px rgba(99, 102, 241, 0.12);
 }
 
-button.secondary {
-  background: #475569;
+button#generateBtn {
+  color: #fff;
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
 }
 
-button.secondary:disabled {
-  opacity: 0.55;
+button#exportBtn {
+  color: #1f2937;
+  background: #f8fafc;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+}
+
+button#exportBtn:disabled {
+  opacity: 0.5;
   cursor: not-allowed;
 }
 
 .itinerary {
-  min-height: 220px;
-  padding: 14px;
-  border-radius: 16px;
-  background: var(--bg);
-  border: 1px dashed var(--border);
+  min-height: 260px;
+  padding: 18px;
+  border-radius: 22px;
+  background: #f8fafc;
+  border: 1px dashed rgba(148, 163, 184, 0.32);
 }
 
 .day-card {
-  padding: 16px;
-  border-radius: 16px;
-  border: 1px solid #e2e8f0;
-  margin-bottom: 14px;
-  background: #fff;
+  padding: 20px;
+  border-radius: 22px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  margin-bottom: 16px;
+  background: #ffffff;
 }
 
 .day-card:last-child {
@@ -118,17 +154,44 @@ button.secondary:disabled {
 }
 
 .day-card h3 {
-  margin: 0 0 10px;
+  margin: 0 0 12px;
+  color: #111827;
 }
 
 .day-card ul {
   margin: 0;
-  padding-left: 20px;
+  padding-left: 22px;
   color: var(--muted);
+  line-height: 1.75;
 }
 
-@media (max-width: 640px) {
+.day-card li {
+  margin-bottom: 8px;
+}
+
+@media (max-width: 768px) {
   .container {
+    width: min(100%, calc(100% - 24px));
+    padding: 24px 0 36px;
+  }
+
+  .form-card,
+  .result-card,
+  header {
+    padding: 22px;
+  }
+
+  .buttons {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 520px) {
+  header h1 {
+    font-size: 2.2rem;
+  }
+
+  .itinerary {
     padding: 16px;
   }
 }
