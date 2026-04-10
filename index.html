@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gerador de Roteiro de Viagem</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>Roteiro de Viagem</h1>
+      <p>Planeje uma viagem rápida com sugestões de atividades por dia.</p>
+    </header>
+
+    <section class="form-card">
+      <label>
+        Destino
+        <input type="text" id="destination" placeholder="Ex: Lisboa" />
+      </label>
+
+      <label>
+        Número de dias
+        <input type="number" id="days" min="1" max="14" value="3" />
+      </label>
+
+      <label>
+        Preferência
+        <select id="preference">
+          <option value="economico">Econômico</option>
+          <option value="cultural">Cultural</option>
+          <option value="aventura">Aventura</option>
+        </select>
+      </label>
+
+      <button id="generateBtn">Gerar roteiro</button>
+      <button id="exportBtn" class="secondary" disabled>Exportar como texto</button>
+    </section>
+
+    <section class="result-card">
+      <h2>Seu roteiro</h2>
+      <div id="itinerary" class="itinerary">
+        <p>Preencha os dados acima e clique em "Gerar roteiro".</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
